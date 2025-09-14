@@ -4064,6 +4064,11 @@ function fm_show_header_login()
                 font-size: 15px;
             }
 
+            .navbar-nav .dropdown-menu {
+                left: auto;
+                right: 0;
+            }
+
             .nav-item.avatar .dropdown-menu a {
                 font-size: 13px;
             }
