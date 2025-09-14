@@ -333,7 +333,6 @@ if ($use_auth) {
         if (function_exists('password_verify')) {
             if (isset($auth_users[$_POST['fm_usr']]) && isset($_POST['fm_pwd']) && password_verify($_POST['fm_pwd'], $auth_users[$_POST['fm_usr']]) && verifyToken($_POST['token'])) {
                 $_SESSION[FM_SESSION_ID]['logged'] = $_POST['fm_usr'];
-                fm_set_msg(lng('You are logged in'));
                 fm_redirect(FM_SELF_URL);
             } else {
                 unset($_SESSION[FM_SESSION_ID]['logged']);
@@ -5559,7 +5558,6 @@ function fm_show_header_login()
         $tr['en']['Generate']       = 'Generate';
         $tr['en']['FullSize']       = 'Full Size';
         $tr['en']['HideColumns']    = 'Hide Perms/Owner columns';
-        $tr['en']['You are logged in'] = 'You are logged in';
         $tr['en']['Nothing selected']  = 'Nothing selected';
         $tr['en']['Paths must be not equal']    = 'Paths must be not equal';
         $tr['en']['Renamed from']       = 'Renamed from';
