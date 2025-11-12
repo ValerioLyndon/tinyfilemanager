@@ -458,7 +458,7 @@ unset($p, $use_auth, $iconv_input_encoding, $use_highlightjs, $highlightjs_style
 /*************************** ACTIONS ***************************/
 
 // Handle all AJAX Request
-if ((isset($_SESSION[FM_SESSION_ID]['logged'], $auth_users[$_SESSION[FM_SESSION_ID]['logged']]) || !FM_USE_AUTH) && isset($_POST['ajax'], $_POST['token']) && !FM_READONLY) {
+if ((isset($_SESSION[FM_SESSION_ID]['logged'], $auth_users[$_SESSION[FM_SESSION_ID]['logged']]) || !FM_USE_AUTH) && isset($_POST['ajax'], $_POST['token'])) {
     if (!verifyToken($_POST['token'])) {
         header('HTTP/1.0 401 Unauthorized');
         die("Invalid Token.");
@@ -469,6 +469,11 @@ if ((isset($_SESSION[FM_SESSION_ID]['logged'], $auth_users[$_SESSION[FM_SESSION_
         $dir = $_POST['path'] == "." ? '' : $_POST['path'];
         $response = scan(fm_clean_path($dir), $_POST['content']);
         echo json_encode($response);
+        exit();
+    }
+
+    // prevent readonly users from doing anything below this point (i.e anything but search)
+    if( FM_READONLY ){
         exit();
     }
 
